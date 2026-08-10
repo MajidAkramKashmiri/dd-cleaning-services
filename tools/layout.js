@@ -7,7 +7,31 @@
  * straight off disk or served from a subfolder.
  */
 
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
 const { BUSINESS, NAV, CITIES, REGIONS, SERVICES } = require('./data');
+
+/**
+ * Content hash appended to the stylesheet and script URLs.
+ *
+ * GitHub Pages serves assets with `cache-control: max-age=600` and no
+ * fingerprint in the filename, so a browser that has main.css cached keeps
+ * serving the old one after a deploy. Hashing the query string means a changed
+ * file is a changed URL, and the update lands immediately.
+ */
+function assetVersion(relPath) {
+    try {
+        const file = fs.readFileSync(path.join(__dirname, '..', relPath));
+        return crypto.createHash('sha1').update(file).digest('hex').slice(0, 8);
+    } catch (err) {
+        return '0';
+    }
+}
+
+const CSS_V = assetVersion('assets/css/main.css');
+const JS_V = assetVersion('assets/js/main.js');
 
 /** Rewrite a root-relative path for a page nested `depth` folders deep. */
 function rel(path, depth) {
@@ -96,7 +120,7 @@ ${page.geo || ''}
 
 <link rel="preload" as="font" type="font/woff2" href="${rel('/assets/fonts/montserrat-latin-var.woff2', depth)}" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="${rel('/assets/fonts/inter-latin-var.woff2', depth)}" crossorigin>
-<link rel="stylesheet" href="${rel('/assets/css/main.css', depth)}">
+<link rel="stylesheet" href="${rel('/assets/css/main.css', depth)}?v=${CSS_V}">
 <script>document.documentElement.className+=' js';</script>
 <script type="application/ld+json">
 ${JSON.stringify(page.schema, null, 2)}
@@ -344,7 +368,7 @@ function footer(depth) {
     </div>
 </footer>
 
-<script src="${rel('/assets/js/main.js', depth)}" defer></script>
+<script src="${rel('/assets/js/main.js', depth)}?v=${JS_V}" defer></script>
 </body>
 </html>`;
 }

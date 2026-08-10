@@ -61,8 +61,8 @@
     --r-lg: 24px;
     --r-pill: 999px;
 
-    --wrap: 1480px;
-    --gut: clamp(1.15rem, 4vw, 2.5rem);
+    --wrap: 1640px;
+    --gut: clamp(1rem, 2.2vw, 1.75rem);
     /* Long-form copy stays readable even though the shell is wide */
     --measure: 64ch;
     --sp: clamp(4rem, 9vw, 7rem);
@@ -866,7 +866,9 @@ a.topbar__item:hover {
     position: relative;
     background: var(--grad);
     color: #fff;
-    padding: clamp(3.4rem, 7vw, 5.6rem) 0 clamp(6rem, 10vw, 8.5rem);
+    /* No overlapping strip below any more, so the deep bottom pad that made
+       room for it goes too. */
+    padding: clamp(3.4rem, 7vw, 5.6rem) 0 clamp(3.4rem, 6vw, 5rem);
     overflow: hidden;
 }
 
@@ -1078,17 +1080,14 @@ a.topbar__item:hover {
 /* --------------------------------------------------------------------------
    Info strip
    -------------------------------------------------------------------------- */
-/* The strip deliberately straddles the hero's bottom edge. Keep the overlap to
-   roughly the icon row so the join reads as intentional rather than as a card
-   that happened to land on a colour change. */
+/* Sits wholly below the hero — no overlap. The cards previously straddled the
+   colour change, which read as a mistake rather than a design. */
 .info-strip {
-    margin-top: clamp(-4.5rem, -5vw, -3.25rem);
     position: relative;
     z-index: 2;
+    padding: clamp(2.25rem, 4vw, 3.25rem) 0 0;
 }
 
-/* The hero already carries deep bottom padding, so the section that follows
-   the strip does not need a full pad on top as well. */
 .info-strip + .section {
     padding-top: clamp(2.5rem, 5vw, 4rem);
 }
@@ -1172,7 +1171,6 @@ a.topbar__item:hover {
 
 @media (max-width: 520px) {
     .info-grid { grid-template-columns: 1fr; }
-    .info-strip { margin-top: -3.5rem; }
 }
 
 /* --------------------------------------------------------------------------

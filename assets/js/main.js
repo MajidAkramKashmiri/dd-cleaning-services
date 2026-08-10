@@ -60,32 +60,74 @@
         });
     }
 
+    var hoverNav = window.matchMedia('(hover: hover) and (min-width: 1081px)');
+
     dropdowns.forEach(function (item) {
         var btn = item.querySelector('.nav__toggle');
         if (!btn) {
             return;
         }
 
+        var closeTimer = null;
+
+        var open = function () {
+            window.clearTimeout(closeTimer);
+            closeDropdowns(item);
+            item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+        };
+
+        var close = function () {
+            window.clearTimeout(closeTimer);
+            item.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+        };
+
         btn.addEventListener('click', function (event) {
             event.preventDefault();
-            var open = item.classList.contains('is-open');
-            closeDropdowns(item);
-            item.classList.toggle('is-open', !open);
-            btn.setAttribute('aria-expanded', String(!open));
+
+            // `detail === 0` means the click came from the keyboard (Enter or
+            // Space), where a toggle is the expected behaviour.
+            var fromKeyboard = event.detail === 0;
+
+            // On a hover-driven nav the menu is already open by the time a
+            // mouse click lands, so toggling would close it — and the pointer
+            // is still inside the item, so hover cannot reopen it. Clicking
+            // must therefore only ever open.
+            if (hoverNav.matches && !fromKeyboard) {
+                open();
+                return;
+            }
+
+            if (item.classList.contains('is-open')) {
+                close();
+            } else {
+                open();
+            }
         });
 
-        // Hover only on pointer devices wide enough for the desktop nav.
-        if (window.matchMedia('(hover: hover) and (min-width: 1081px)').matches) {
-            item.addEventListener('mouseenter', function () {
-                closeDropdowns(item);
-                item.classList.add('is-open');
-                btn.setAttribute('aria-expanded', 'true');
-            });
-            item.addEventListener('mouseleave', function () {
-                item.classList.remove('is-open');
-                btn.setAttribute('aria-expanded', 'false');
-            });
-        }
+        item.addEventListener('mouseenter', function () {
+            if (hoverNav.matches) {
+                open();
+            }
+        });
+
+        item.addEventListener('mouseleave', function () {
+            if (!hoverNav.matches) {
+                return;
+            }
+            // A short grace period so clipping a corner on the way to the
+            // panel does not shut the menu.
+            window.clearTimeout(closeTimer);
+            closeTimer = window.setTimeout(close, 260);
+        });
+
+        // Tabbing out of the panel closes it.
+        item.addEventListener('focusout', function (event) {
+            if (!item.contains(event.relatedTarget)) {
+                close();
+            }
+        });
     });
 
     document.addEventListener('click', function (event) {
