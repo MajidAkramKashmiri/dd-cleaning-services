@@ -212,8 +212,30 @@ em {
 }
 
 .section--tint {
+    position: relative;
     background: var(--grad-soft);
     border-block: 1px solid var(--line);
+    overflow: hidden;
+}
+
+/* The light sections were the only dead-still surfaces on the page. This is a
+   very faint colour drift — you should never consciously notice it, only feel
+   that the page is alive. */
+.section--tint::before {
+    content: '';
+    position: absolute;
+    inset: -30% -10%;
+    pointer-events: none;
+    background:
+        radial-gradient(38% 44% at 18% 22%, rgba(167, 139, 250, .30), transparent 70%),
+        radial-gradient(34% 40% at 82% 72%, rgba(244, 114, 182, .26), transparent 70%);
+    filter: blur(40px);
+    animation: drift-c 46s ease-in-out infinite;
+}
+
+.section--tint > .wrap {
+    position: relative;
+    z-index: 1;
 }
 
 .section-head {
@@ -376,6 +398,111 @@ em {
 }
 
 /* --------------------------------------------------------------------------
+   Animated background: aurora + grain
+
+   Three large, heavily blurred colour blobs drift on long offset cycles. On
+   top sits a fixed grain texture. The grain matters more than it sounds — a
+   pure CSS gradient is mathematically smooth, and that smoothness is most of
+   what makes a page read as synthetic. A little noise breaks it up.
+   -------------------------------------------------------------------------- */
+.aurora {
+    position: absolute;
+    inset: -25%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .75;
+    overflow: hidden;
+}
+
+/* Blur each blob rather than the container. Blurring the parent forces the
+   whole layer to re-rasterise every frame its children move; blurring the
+   child lets the compositor move a cached texture instead. */
+.aurora i {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    filter: blur(60px);
+    will-change: transform;
+}
+
+.aurora i:nth-child(1) {
+    width: 46%;
+    height: 62%;
+    top: 2%;
+    left: 4%;
+    background: radial-gradient(circle, rgba(236, 72, 153, .85), rgba(236, 72, 153, 0) 68%);
+    animation: drift-a 26s ease-in-out infinite;
+}
+
+.aurora i:nth-child(2) {
+    width: 52%;
+    height: 70%;
+    top: 12%;
+    right: 2%;
+    background: radial-gradient(circle, rgba(124, 58, 237, .9), rgba(124, 58, 237, 0) 68%);
+    animation: drift-b 34s ease-in-out infinite;
+}
+
+.aurora i:nth-child(3) {
+    width: 40%;
+    height: 56%;
+    bottom: -6%;
+    left: 32%;
+    background: radial-gradient(circle, rgba(167, 139, 250, .7), rgba(167, 139, 250, 0) 70%);
+    animation: drift-c 30s ease-in-out infinite;
+}
+
+@keyframes drift-a {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    33%      { transform: translate3d(14%, 8%, 0) scale(1.16); }
+    66%      { transform: translate3d(-8%, 14%, 0) scale(.92); }
+}
+
+@keyframes drift-b {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+    40%      { transform: translate3d(-16%, 10%, 0) scale(.9); }
+    70%      { transform: translate3d(6%, -10%, 0) scale(1.2); }
+}
+
+@keyframes drift-c {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(.95); }
+    50%      { transform: translate3d(12%, -14%, 0) scale(1.22); }
+}
+
+/* Fractal noise, inlined so it costs no request */
+.grain {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+/* A slow diagonal light sweep across the hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -30%;
+    width: 45%;
+    height: 220%;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .13), transparent);
+    transform: rotate(14deg);
+    animation: sweep 11s ease-in-out infinite;
+}
+
+@keyframes sweep {
+    0%       { transform: translateX(0) rotate(14deg); opacity: 0; }
+    12%      { opacity: 1; }
+    55%, 100% { transform: translateX(320%) rotate(14deg); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
    Decorative bubbles
    -------------------------------------------------------------------------- */
 .bubbles {
@@ -406,9 +533,24 @@ em {
     background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .32), rgba(255, 255, 255, .04) 60%);
 }
 
+/* Three motion paths rather than one, so the bubbles do not rise in lockstep */
+.bubbles i:nth-child(3n)   { animation-name: float-b; animation-duration: 19s; }
+.bubbles i:nth-child(3n+1) { animation-name: float-c; animation-duration: 23s; }
+
 @keyframes float {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50%      { transform: translate3d(0, -22px, 0) scale(1.05); }
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+    50%      { transform: translate3d(10px, -30px, 0) scale(1.06); opacity: .78; }
+}
+
+@keyframes float-b {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .85; }
+    35%      { transform: translate3d(-18px, -22px, 0) scale(1.1); opacity: 1; }
+    70%      { transform: translate3d(12px, -38px, 0) scale(.95); opacity: .7; }
+}
+
+@keyframes float-c {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1.04); opacity: .7; }
+    50%      { transform: translate3d(22px, -26px, 0) scale(.9); opacity: 1; }
 }
 
 /* --------------------------------------------------------------------------
@@ -879,6 +1021,26 @@ a.topbar__item:hover {
     height: 160px;
     background: linear-gradient(to top, rgba(31, 11, 61, .22), transparent);
     pointer-events: none;
+    z-index: 0;
+}
+
+/* A real room behind the colour. Barely visible, but it gives the gradient
+   something to sit on and stops the panel reading as flat paint. */
+.hero__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: .16;
+    mix-blend-mode: luminosity;
+    animation: kenburns 40s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+    from { transform: scale(1.06) translate3d(0, 0, 0); }
+    to   { transform: scale(1.16) translate3d(-1.5%, -1.5%, 0); }
 }
 
 .hero__wrap {
@@ -1377,6 +1539,66 @@ a.topbar__item:hover {
     letter-spacing: -0.04em;
 }
 
+/* ----- photo variant ----- */
+.s-card--photo {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.s-card__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+
+.s-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2, .7, .3, 1);
+}
+
+.s-card__tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(76, 29, 149, .40), rgba(219, 39, 119, .18) 55%, rgba(31, 11, 61, .48));
+    mix-blend-mode: multiply;
+}
+
+.s-card--photo .s-card__num {
+    top: .55rem;
+    right: 1rem;
+    font-size: 3.1rem;
+    color: rgba(255, 255, 255, .42);
+}
+
+.s-card:hover .s-card__media img {
+    transform: scale(1.07);
+}
+
+/* Straddles the photo's bottom edge. A negative margin does this without
+   needing to know the rendered height of the image. */
+.s-card--photo .s-card__icon {
+    position: relative;
+    z-index: 2;
+    margin: -30px 0 -16px 1.4rem;
+}
+
+.s-card--photo::before {
+    display: none;
+}
+
+.s-card__body {
+    padding: 1.5rem 1.4rem 1.5rem;
+}
+
+.s-card--photo .s-card__body {
+    padding-top: 1.9rem;
+}
+
 .s-card__icon {
     display: grid;
     place-items: center;
@@ -1387,6 +1609,11 @@ a.topbar__item:hover {
     color: #fff;
     margin-bottom: 1.1rem;
     box-shadow: 0 12px 24px -14px rgba(109, 40, 217, .8);
+    transition: transform .25s ease;
+}
+
+.s-card:hover .s-card__icon {
+    transform: translateY(-3px) rotate(-5deg);
 }
 
 .s-card__icon svg {
@@ -1489,25 +1716,91 @@ a.topbar__item:hover {
 
 .s-detail__art {
     position: relative;
+    margin: 0;
     aspect-ratio: 4 / 3.4;
     border-radius: var(--r-lg);
     background: var(--card-grad, var(--grad));
     display: grid;
     place-items: center;
-    overflow: hidden;
     box-shadow: var(--shadow-lg);
+    isolation: isolate;
+}
+
+/* Offset accent frame — the asymmetry is deliberate. Perfectly concentric
+   cards everywhere is a large part of what makes a layout look generated. */
+.s-detail__frame {
+    position: absolute;
+    inset: 1.5rem -1.5rem -1.5rem 1.5rem;
+    border: 2px solid var(--violet-300);
+    border-radius: var(--r-lg);
+    z-index: -1;
+}
+
+.s-detail--flip .s-detail__frame {
+    inset: 1.5rem 1.5rem -1.5rem -1.5rem;
+    border-color: var(--pink-200);
+}
+
+.s-detail__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    transition: transform 1.1s cubic-bezier(.2, .7, .3, 1);
+}
+
+/* Brand tint over the photo, so six photos of different colour temperature
+   still read as one set. */
+.s-detail__tint {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(150deg, rgba(76, 29, 149, .42), rgba(219, 39, 119, .22) 60%, rgba(31, 11, 61, .40));
+    mix-blend-mode: multiply;
+}
+
+.s-detail__art:hover .s-detail__img {
+    transform: scale(1.05);
+}
+
+.s-detail__chip {
+    position: absolute;
+    right: 1.1rem;
+    bottom: 1.1rem;
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 17px;
+    background: rgba(255, 255, 255, .18);
+    border: 1px solid rgba(255, 255, 255, .38);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    transition: transform .3s ease;
+}
+
+.s-detail__chip svg {
+    width: 26px;
+    height: 26px;
+}
+
+.s-detail__art:hover .s-detail__chip {
+    transform: translateY(-4px) rotate(-6deg);
 }
 
 .s-detail__num {
     position: absolute;
-    top: 1.2rem;
-    left: 1.6rem;
+    top: .6rem;
+    left: 1.4rem;
     font-family: var(--display);
-    font-size: clamp(4rem, 9vw, 6.5rem);
+    font-size: clamp(4rem, 9vw, 7rem);
     font-weight: 900;
     line-height: 1;
-    color: rgba(255, 255, 255, .18);
+    color: rgba(255, 255, 255, .3);
     letter-spacing: -0.05em;
+    text-shadow: 0 2px 20px rgba(31, 11, 61, .3);
 }
 
 .s-detail__icon {
@@ -2713,8 +3006,17 @@ a.topbar__item:hover {
         transform: none;
     }
 
-    .bubbles {
+    /* Motion off: drop the moving decoration entirely, but keep the aurora and
+       grain as static colour — they are part of the design, not the animation. */
+    .bubbles,
+    .hero::before {
         display: none;
+    }
+
+    .aurora i,
+    .section--tint::before,
+    .hero__photo {
+        animation: none !important;
     }
 }
 

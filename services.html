@@ -30,7 +30,7 @@
 
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/montserrat-latin-var.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin-var.woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/main.css?v=282b97cb">
+<link rel="stylesheet" href="assets/css/main.css?v=1a85a9d4">
 <script>document.documentElement.className+=' js';</script>
 <script type="application/ld+json">
 {
@@ -475,6 +475,8 @@
 <main id="main">
 
 <section class="page-hero">
+    <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="grain" aria-hidden="true"></span>
     <span class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
     <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol>
@@ -490,53 +492,101 @@
 <section class="section">
     <div class="wrap">
         <div class="card-grid">
-        <article class="s-card s-card--a" data-reveal>
-            <span class="s-card__num">01</span>
+        <article class="s-card s-card--a s-card--photo" data-reveal>
+            <span class="s-card__media">
+                <img src="assets/img/work/commercial-cleaning-700.jpg" srcset="assets/img/work/commercial-cleaning-700.jpg 700w, assets/img/work/commercial-cleaning.jpg 1400w"
+                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
+                     alt="A modern boardroom with glass walls and carpet tiles, cleaned and ready for the day" loading="lazy" decoding="async" width="700" height="438">
+                <span class="s-card__tint"></span>
+                <span class="s-card__num">01</span>
+            </span>
             <span class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V5.5A1.5 1.5 0 0 1 6.5 4h6A1.5 1.5 0 0 1 14 5.5V21"/><path d="M14 10h3.5A1.5 1.5 0 0 1 19 11.5V21"/><path d="M8 8h3M8 12h3M8 16h3M16.5 14h1M16.5 17.5h1"/></svg></span>
-            <h3><a href="services.html#commercial-cleaning">Commercial Cleaning</a></h3>
-            <p class="s-card__kicker">Contract or one-off</p>
-            <p>Retail floors, warehouses, clinics and multi-tenant buildings on a schedule that fits your trading hours.</p>
-            <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <div class="s-card__body">
+                <h3><a href="services.html#commercial-cleaning">Commercial Cleaning</a></h3>
+                <p class="s-card__kicker">Contract or one-off</p>
+                <p>Retail floors, warehouses, clinics and multi-tenant buildings on a schedule that fits your trading hours.</p>
+                <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
         </article>
-        <article class="s-card s-card--b" data-reveal>
-            <span class="s-card__num">02</span>
+        <article class="s-card s-card--b s-card--photo" data-reveal>
+            <span class="s-card__media">
+                <img src="assets/img/work/office-cleaning-700.jpg" srcset="assets/img/work/office-cleaning-700.jpg 700w, assets/img/work/office-cleaning.jpg 1400w"
+                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
+                     alt="A bright, uncluttered office desk with a plant, wiped down before the team arrives" loading="lazy" decoding="async" width="700" height="438">
+                <span class="s-card__tint"></span>
+                <span class="s-card__num">02</span>
+            </span>
             <span class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="14" height="9.5" rx="1.6"/><path d="M6.5 18h6M9.5 14v4"/><path d="M18.5 20V9.5h3V20"/></svg></span>
-            <h3><a href="services.html#office-cleaning">Office Cleaning</a></h3>
-            <p class="s-card__kicker">Before you open, after you close</p>
-            <p>Desks, kitchens, washrooms, glass and communal areas — done before the first person badges in.</p>
-            <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <div class="s-card__body">
+                <h3><a href="services.html#office-cleaning">Office Cleaning</a></h3>
+                <p class="s-card__kicker">Before you open, after you close</p>
+                <p>Desks, kitchens, washrooms, glass and communal areas — done before the first person badges in.</p>
+                <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
         </article>
-        <article class="s-card s-card--c" data-reveal>
-            <span class="s-card__num">03</span>
+        <article class="s-card s-card--c s-card--photo" data-reveal>
+            <span class="s-card__media">
+                <img src="assets/img/work/carpet-cleaning-700.jpg" srcset="assets/img/work/carpet-cleaning-700.jpg 700w, assets/img/work/carpet-cleaning.jpg 1400w"
+                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
+                     alt="Close view of a deep-pile carpet in a traffic lane, mid-clean" loading="lazy" decoding="async" width="700" height="438">
+                <span class="s-card__tint"></span>
+                <span class="s-card__num">03</span>
+            </span>
             <span class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="12" rx="2"/><path d="M2.5 10h19M2.5 15h19"/><path d="M8 6.5v12M15 6.5v12"/></svg></span>
-            <h3><a href="services.html#carpet-cleaning">Professional Carpet Cleaning</a></h3>
-            <p class="s-card__kicker">Hot water extraction</p>
-            <p>Truck-mount and portable extraction that lifts ground-in soil, traffic lanes and odour — not just the surface.</p>
-            <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <div class="s-card__body">
+                <h3><a href="services.html#carpet-cleaning">Professional Carpet Cleaning</a></h3>
+                <p class="s-card__kicker">Hot water extraction</p>
+                <p>Truck-mount and portable extraction that lifts ground-in soil, traffic lanes and odour — not just the surface.</p>
+                <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
         </article>
-        <article class="s-card s-card--d" data-reveal>
-            <span class="s-card__num">04</span>
+        <article class="s-card s-card--d s-card--photo" data-reveal>
+            <span class="s-card__media">
+                <img src="assets/img/work/detail-sanitization-700.jpg" srcset="assets/img/work/detail-sanitization-700.jpg 700w, assets/img/work/detail-sanitization.jpg 1400w"
+                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
+                     alt="A washroom basin and taps — the high-touch fittings a sanitization pass targets" loading="lazy" decoding="async" width="700" height="438">
+                <span class="s-card__tint"></span>
+                <span class="s-card__num">04</span>
+            </span>
             <span class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 9h4.2A2.3 2.3 0 0 1 15 11.3v8.4a2.3 2.3 0 0 1-2.3 2.3H8.5a2.3 2.3 0 0 1-2.3-2.3v-8.4A2.3 2.3 0 0 1 8.5 9z"/><path d="M9.4 9V5.6h3.1"/><path d="M12.5 5.6h3.2"/><path d="M17.6 3.4l2.1.9M17.6 7.8l2.1-.9M18.6 5.6h2.1"/><path d="M6.2 13.6h8.8"/></svg></span>
-            <h3><a href="services.html#detail-sanitization">Detail Sanitization</a></h3>
-            <p class="s-card__kicker">High-touch and clinical</p>
-            <p>Targeted disinfection of every surface a hand actually touches, with dwell times observed properly.</p>
-            <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <div class="s-card__body">
+                <h3><a href="services.html#detail-sanitization">Detail Sanitization</a></h3>
+                <p class="s-card__kicker">High-touch and clinical</p>
+                <p>Targeted disinfection of every surface a hand actually touches, with dwell times observed properly.</p>
+                <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
         </article>
-        <article class="s-card s-card--e" data-reveal>
-            <span class="s-card__num">05</span>
+        <article class="s-card s-card--e s-card--photo" data-reveal>
+            <span class="s-card__media">
+                <img src="assets/img/work/floor-cleaning-700.jpg" srcset="assets/img/work/floor-cleaning-700.jpg 700w, assets/img/work/floor-cleaning.jpg 1400w"
+                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
+                     alt="A flat mop on polished hardwood, part-way through a floor clean" loading="lazy" decoding="async" width="700" height="438">
+                <span class="s-card__tint"></span>
+                <span class="s-card__num">05</span>
+            </span>
             <span class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 20.5h19"/><path d="M6 20.5l2.6-8M18 20.5l-2.6-8M12 20.5v-8"/><path d="M8.3 12.5h7.4"/><path d="M9.4 16.5h5.2"/></svg></span>
-            <h3><a href="services.html#floor-cleaning">Floor Cleaning</a></h3>
-            <p class="s-card__kicker">Strip, seal, buff, restore</p>
-            <p>Hard floor care for vinyl, tile, terrazzo, concrete and wood — scrubbed, sealed and brought back up.</p>
-            <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <div class="s-card__body">
+                <h3><a href="services.html#floor-cleaning">Floor Cleaning</a></h3>
+                <p class="s-card__kicker">Strip, seal, buff, restore</p>
+                <p>Hard floor care for vinyl, tile, terrazzo, concrete and wood — scrubbed, sealed and brought back up.</p>
+                <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
         </article>
-        <article class="s-card s-card--f" data-reveal>
-            <span class="s-card__num">06</span>
+        <article class="s-card s-card--f s-card--photo" data-reveal>
+            <span class="s-card__media">
+                <img src="assets/img/work/home-cleaning-700.jpg" srcset="assets/img/work/home-cleaning-700.jpg 700w, assets/img/work/home-cleaning.jpg 1400w"
+                     sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
+                     alt="A tidy, light-filled family living space seen from the landing above" loading="lazy" decoding="async" width="700" height="438">
+                <span class="s-card__tint"></span>
+                <span class="s-card__num">06</span>
+            </span>
             <span class="s-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5L12 3.5l8.5 7"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5.5h4V20"/></svg></span>
-            <h3><a href="services.html#home-cleaning">Home Cleaning</a></h3>
-            <p class="s-card__kicker">Regular, deep or move-out</p>
-            <p>The same crews, the same standard, in your house — weekly, fortnightly, or one deep clean to reset.</p>
-            <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            <div class="s-card__body">
+                <h3><a href="services.html#home-cleaning">Home Cleaning</a></h3>
+                <p class="s-card__kicker">Regular, deep or move-out</p>
+                <p>The same crews, the same standard, in your house — weekly, fortnightly, or one deep clean to reset.</p>
+                <span class="s-card__more">Read more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
         </article>
     </div>
     </div>
@@ -546,11 +596,17 @@
     <div class="wrap s-details">
         
 <article class="s-detail" id="commercial-cleaning">
-    <div class="s-detail__art s-card--a" aria-hidden="true">
-        <span class="s-detail__num">01</span>
-        <span class="s-detail__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V5.5A1.5 1.5 0 0 1 6.5 4h6A1.5 1.5 0 0 1 14 5.5V21"/><path d="M14 10h3.5A1.5 1.5 0 0 1 19 11.5V21"/><path d="M8 8h3M8 12h3M8 16h3M16.5 14h1M16.5 17.5h1"/></svg></span>
-        <span class="bubbles bubbles--soft"><i></i><i></i><i></i><i></i></span>
-    </div>
+    <figure class="s-detail__art s-card--a" data-reveal>
+        <span class="s-detail__frame" aria-hidden="true"></span>
+        <img class="s-detail__img"
+             src="assets/img/work/commercial-cleaning.jpg"
+             srcset="assets/img/work/commercial-cleaning-700.jpg 700w, assets/img/work/commercial-cleaning.jpg 1400w"
+             sizes="(max-width: 860px) 92vw, 44vw"
+             alt="A modern boardroom with glass walls and carpet tiles, cleaned and ready for the day" loading="lazy" decoding="async" width="1400" height="1050">
+        <span class="s-detail__tint" aria-hidden="true"></span>
+        <span class="s-detail__num" aria-hidden="true">01</span>
+        <span class="s-detail__chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V5.5A1.5 1.5 0 0 1 6.5 4h6A1.5 1.5 0 0 1 14 5.5V21"/><path d="M14 10h3.5A1.5 1.5 0 0 1 19 11.5V21"/><path d="M8 8h3M8 12h3M8 16h3M16.5 14h1M16.5 17.5h1"/></svg></span>
+    </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> Contract or one-off</p>
         <h2 data-reveal>Commercial Cleaning</h2>
@@ -570,11 +626,17 @@
 </article>
 
 <article class="s-detail s-detail--flip" id="office-cleaning">
-    <div class="s-detail__art s-card--b" aria-hidden="true">
-        <span class="s-detail__num">02</span>
-        <span class="s-detail__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="14" height="9.5" rx="1.6"/><path d="M6.5 18h6M9.5 14v4"/><path d="M18.5 20V9.5h3V20"/></svg></span>
-        <span class="bubbles bubbles--soft"><i></i><i></i><i></i><i></i></span>
-    </div>
+    <figure class="s-detail__art s-card--b" data-reveal>
+        <span class="s-detail__frame" aria-hidden="true"></span>
+        <img class="s-detail__img"
+             src="assets/img/work/office-cleaning.jpg"
+             srcset="assets/img/work/office-cleaning-700.jpg 700w, assets/img/work/office-cleaning.jpg 1400w"
+             sizes="(max-width: 860px) 92vw, 44vw"
+             alt="A bright, uncluttered office desk with a plant, wiped down before the team arrives" loading="lazy" decoding="async" width="1400" height="1050">
+        <span class="s-detail__tint" aria-hidden="true"></span>
+        <span class="s-detail__num" aria-hidden="true">02</span>
+        <span class="s-detail__chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="14" height="9.5" rx="1.6"/><path d="M6.5 18h6M9.5 14v4"/><path d="M18.5 20V9.5h3V20"/></svg></span>
+    </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> Before you open, after you close</p>
         <h2 data-reveal>Office Cleaning</h2>
@@ -594,11 +656,17 @@
 </article>
 
 <article class="s-detail" id="carpet-cleaning">
-    <div class="s-detail__art s-card--c" aria-hidden="true">
-        <span class="s-detail__num">03</span>
-        <span class="s-detail__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="12" rx="2"/><path d="M2.5 10h19M2.5 15h19"/><path d="M8 6.5v12M15 6.5v12"/></svg></span>
-        <span class="bubbles bubbles--soft"><i></i><i></i><i></i><i></i></span>
-    </div>
+    <figure class="s-detail__art s-card--c" data-reveal>
+        <span class="s-detail__frame" aria-hidden="true"></span>
+        <img class="s-detail__img"
+             src="assets/img/work/carpet-cleaning.jpg"
+             srcset="assets/img/work/carpet-cleaning-700.jpg 700w, assets/img/work/carpet-cleaning.jpg 1400w"
+             sizes="(max-width: 860px) 92vw, 44vw"
+             alt="Close view of a deep-pile carpet in a traffic lane, mid-clean" loading="lazy" decoding="async" width="1400" height="1050">
+        <span class="s-detail__tint" aria-hidden="true"></span>
+        <span class="s-detail__num" aria-hidden="true">03</span>
+        <span class="s-detail__chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="12" rx="2"/><path d="M2.5 10h19M2.5 15h19"/><path d="M8 6.5v12M15 6.5v12"/></svg></span>
+    </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> Hot water extraction</p>
         <h2 data-reveal>Professional Carpet Cleaning</h2>
@@ -618,11 +686,17 @@
 </article>
 
 <article class="s-detail s-detail--flip" id="detail-sanitization">
-    <div class="s-detail__art s-card--d" aria-hidden="true">
-        <span class="s-detail__num">04</span>
-        <span class="s-detail__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 9h4.2A2.3 2.3 0 0 1 15 11.3v8.4a2.3 2.3 0 0 1-2.3 2.3H8.5a2.3 2.3 0 0 1-2.3-2.3v-8.4A2.3 2.3 0 0 1 8.5 9z"/><path d="M9.4 9V5.6h3.1"/><path d="M12.5 5.6h3.2"/><path d="M17.6 3.4l2.1.9M17.6 7.8l2.1-.9M18.6 5.6h2.1"/><path d="M6.2 13.6h8.8"/></svg></span>
-        <span class="bubbles bubbles--soft"><i></i><i></i><i></i><i></i></span>
-    </div>
+    <figure class="s-detail__art s-card--d" data-reveal>
+        <span class="s-detail__frame" aria-hidden="true"></span>
+        <img class="s-detail__img"
+             src="assets/img/work/detail-sanitization.jpg"
+             srcset="assets/img/work/detail-sanitization-700.jpg 700w, assets/img/work/detail-sanitization.jpg 1400w"
+             sizes="(max-width: 860px) 92vw, 44vw"
+             alt="A washroom basin and taps — the high-touch fittings a sanitization pass targets" loading="lazy" decoding="async" width="1400" height="1050">
+        <span class="s-detail__tint" aria-hidden="true"></span>
+        <span class="s-detail__num" aria-hidden="true">04</span>
+        <span class="s-detail__chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 9h4.2A2.3 2.3 0 0 1 15 11.3v8.4a2.3 2.3 0 0 1-2.3 2.3H8.5a2.3 2.3 0 0 1-2.3-2.3v-8.4A2.3 2.3 0 0 1 8.5 9z"/><path d="M9.4 9V5.6h3.1"/><path d="M12.5 5.6h3.2"/><path d="M17.6 3.4l2.1.9M17.6 7.8l2.1-.9M18.6 5.6h2.1"/><path d="M6.2 13.6h8.8"/></svg></span>
+    </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> High-touch and clinical</p>
         <h2 data-reveal>Detail Sanitization</h2>
@@ -642,11 +716,17 @@
 </article>
 
 <article class="s-detail" id="floor-cleaning">
-    <div class="s-detail__art s-card--e" aria-hidden="true">
-        <span class="s-detail__num">05</span>
-        <span class="s-detail__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 20.5h19"/><path d="M6 20.5l2.6-8M18 20.5l-2.6-8M12 20.5v-8"/><path d="M8.3 12.5h7.4"/><path d="M9.4 16.5h5.2"/></svg></span>
-        <span class="bubbles bubbles--soft"><i></i><i></i><i></i><i></i></span>
-    </div>
+    <figure class="s-detail__art s-card--e" data-reveal>
+        <span class="s-detail__frame" aria-hidden="true"></span>
+        <img class="s-detail__img"
+             src="assets/img/work/floor-cleaning.jpg"
+             srcset="assets/img/work/floor-cleaning-700.jpg 700w, assets/img/work/floor-cleaning.jpg 1400w"
+             sizes="(max-width: 860px) 92vw, 44vw"
+             alt="A flat mop on polished hardwood, part-way through a floor clean" loading="lazy" decoding="async" width="1400" height="1050">
+        <span class="s-detail__tint" aria-hidden="true"></span>
+        <span class="s-detail__num" aria-hidden="true">05</span>
+        <span class="s-detail__chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 20.5h19"/><path d="M6 20.5l2.6-8M18 20.5l-2.6-8M12 20.5v-8"/><path d="M8.3 12.5h7.4"/><path d="M9.4 16.5h5.2"/></svg></span>
+    </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> Strip, seal, buff, restore</p>
         <h2 data-reveal>Floor Cleaning</h2>
@@ -666,11 +746,17 @@
 </article>
 
 <article class="s-detail s-detail--flip" id="home-cleaning">
-    <div class="s-detail__art s-card--f" aria-hidden="true">
-        <span class="s-detail__num">06</span>
-        <span class="s-detail__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5L12 3.5l8.5 7"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5.5h4V20"/></svg></span>
-        <span class="bubbles bubbles--soft"><i></i><i></i><i></i><i></i></span>
-    </div>
+    <figure class="s-detail__art s-card--f" data-reveal>
+        <span class="s-detail__frame" aria-hidden="true"></span>
+        <img class="s-detail__img"
+             src="assets/img/work/home-cleaning.jpg"
+             srcset="assets/img/work/home-cleaning-700.jpg 700w, assets/img/work/home-cleaning.jpg 1400w"
+             sizes="(max-width: 860px) 92vw, 44vw"
+             alt="A tidy, light-filled family living space seen from the landing above" loading="lazy" decoding="async" width="1400" height="1050">
+        <span class="s-detail__tint" aria-hidden="true"></span>
+        <span class="s-detail__num" aria-hidden="true">06</span>
+        <span class="s-detail__chip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5L12 3.5l8.5 7"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5.5h4V20"/></svg></span>
+    </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> Regular, deep or move-out</p>
         <h2 data-reveal>Home Cleaning</h2>
@@ -739,6 +825,8 @@
 </section>
 
 <section class="cta-band">
+    <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="grain" aria-hidden="true"></span>
     <span class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
     <div class="wrap">
         <p class="eyebrow eyebrow--light" data-reveal><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/><path d="M18.5 15l.8 2.6 2.7.9-2.7.9-.8 2.6-.8-2.6-2.7-.9 2.7-.9z" opacity=".7"/></svg> 100% satisfaction guarantee — we re-clean free within 24 hours</p>

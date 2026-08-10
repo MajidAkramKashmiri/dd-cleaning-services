@@ -261,6 +261,8 @@ function ctaBand(depth, options = {}) {
 
     return `
 <section class="cta-band">
+    <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="grain" aria-hidden="true"></span>
     <span class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
     <div class="wrap">
         <p class="eyebrow eyebrow--light" data-reveal>${ICONS.sparkle} ${esc(BUSINESS.guarantee)}</p>

@@ -195,14 +195,52 @@ testimonials, booking form and a link-dense footer.
 
 ### Imagery
 
-There is **no photography on the site yet** — none was supplied, and stock
-photos of other people's buildings would be worse than none. The design carries
-itself on gradients, iconography and typography instead.
+Seven photographs in `assets/img/work/`, one per service plus a hero backdrop.
+Each is served at two sizes (`-700.jpg` and full) via `srcset`, lazy-loaded
+below the fold, and carries a brand gradient tint so six photos of different
+colour temperature still read as one set. Total weight is about 1.6 MB.
 
-To add real photos later, drop them in `assets/img/work/` and they can be wired
-into the service detail rows in `tools/components.js` (`serviceDetails`), which
-currently render a gradient panel where an image would sit. Photos of your own
-crews and finished jobs will lift the site more than any other single change.
+**Licensing.** Every photo is **CC0 / public domain**, sourced from StockSnap
+via the Openverse API. CC0 permits commercial use and modification with no
+attribution required, so nothing on the page needs a credit line. The
+provenance is recorded in `tools/photo-credits.json` in case you ever need to
+evidence it.
+
+**These are stand-ins, and you should replace them.** They show clean spaces
+and one mop; none of them are your crews, your vans or your finished jobs.
+Photographs of your own work will lift this site more than any other single
+change, and they cost nothing but a phone camera.
+
+To swap one, drop a new file into `assets/img/work/` using the same base name
+(e.g. `carpet-cleaning.jpg` plus a 700px-wide `carpet-cleaning-700.jpg`) and
+rebuild. To resize a photo to match:
+
+```bash
+sips -s format jpeg -s formatOptions 72 -Z 1400 source.jpg --out carpet-cleaning.jpg
+sips -s format jpeg -s formatOptions 68 -Z 700  source.jpg --out carpet-cleaning-700.jpg
+```
+
+Update the `alt` text in `tools/data.js` at the same time — it describes the
+photo for screen readers and for search engines.
+
+If a service has no `image` key in `tools/data.js`, the layout falls back to
+the original gradient-and-icon panel on its own, so nothing breaks while you
+are part-way through replacing them.
+
+### Motion
+
+The coloured bands are not still. Each carries three blurred colour blobs
+drifting on long offset cycles (the "aurora"), a fixed grain texture, floating
+bubbles on three different motion paths, and — on the hero — a slow diagonal
+light sweep and a very gradual Ken Burns push on the background photo. The
+light sections carry a much fainter version of the same colour drift.
+
+The grain does more work than it looks like it should: a pure CSS gradient is
+mathematically smooth, and that smoothness is most of what makes a page read as
+machine-made. A little noise breaks it.
+
+All of it is disabled under `prefers-reduced-motion`, which keeps the aurora
+and grain as static colour but stops every animation and hides the bubbles.
 
 Brand assets in `assets/img/brand/` are generated from `logo.svg` — if you change
 the logo, re-export `favicon-64.png`, `apple-touch-icon.png`, `icon-512.png` and

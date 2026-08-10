@@ -101,7 +101,10 @@ const SERVICES = [
             'Out-of-hours and weekend crews at no premium on contract',
             'Fully insured, background-checked cleaners'
         ],
-        gradient: 'a'
+        gradient: 'a',
+        image: 'commercial-cleaning',
+        alt:
+            'A modern boardroom with glass walls and carpet tiles, cleaned and ready for the day'
     },
     {
         slug: 'office-cleaning',
@@ -119,7 +122,10 @@ const SERVICES = [
             'Waste and recycling handled to your building’s rules',
             'One point of contact and the same crew each visit'
         ],
-        gradient: 'b'
+        gradient: 'b',
+        image: 'office-cleaning',
+        alt:
+            'A bright, uncluttered office desk with a plant, wiped down before the team arrives'
     },
     {
         slug: 'carpet-cleaning',
@@ -137,7 +143,10 @@ const SERVICES = [
             'Upholstery, rugs and office chairs by the same method',
             'Low-moisture option for occupied offices — dry in 2–4 hours'
         ],
-        gradient: 'c'
+        gradient: 'c',
+        image: 'carpet-cleaning',
+        alt:
+            'Close view of a deep-pile carpet in a traffic lane, mid-clean'
     },
     {
         slug: 'detail-sanitization',
@@ -155,7 +164,10 @@ const SERVICES = [
             'Electrostatic and fogging application for large spaces',
             'Post-incident and move-in deep sanitization'
         ],
-        gradient: 'd'
+        gradient: 'd',
+        image: 'detail-sanitization',
+        alt:
+            'A washroom basin and taps — the high-touch fittings a sanitization pass targets'
     },
     {
         slug: 'floor-cleaning',
@@ -173,7 +185,10 @@ const SERVICES = [
             'Buffing and burnishing to restore gloss',
             'Scheduled maintenance so the finish holds'
         ],
-        gradient: 'e'
+        gradient: 'e',
+        image: 'floor-cleaning',
+        alt:
+            'A flat mop on polished hardwood, part-way through a floor clean'
     },
     {
         slug: 'home-cleaning',
@@ -191,7 +206,10 @@ const SERVICES = [
             'All products and equipment supplied at no extra cost',
             'Pet-safe and fragrance-free products on request'
         ],
-        gradient: 'f'
+        gradient: 'f',
+        image: 'home-cleaning',
+        alt:
+            'A tidy, light-filled family living space seen from the landing above'
     }
 ];
 

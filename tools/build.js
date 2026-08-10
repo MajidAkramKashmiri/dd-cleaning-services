@@ -107,6 +107,8 @@ function pageHero({ eyebrow, title, lede, crumbs = [], depth = 0 }) {
 
     return `
 <section class="page-hero">
+    <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="grain" aria-hidden="true"></span>
     <span class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
     <div class="wrap">
         ${trail}
@@ -210,6 +212,8 @@ ${C.infoStrip(depth)}
 </section>
 
 <section class="band">
+    <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="grain" aria-hidden="true"></span>
     <span class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     <div class="wrap">
         <div class="band__inner">
@@ -442,6 +446,8 @@ ${pageHero({
 </section>
 
 <section class="band">
+    <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="grain" aria-hidden="true"></span>
     <span class="bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     <div class="wrap">
         <div class="band__inner">
