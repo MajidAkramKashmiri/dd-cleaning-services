@@ -126,9 +126,11 @@ function header(page, depth) {
         const cities = CITIES.filter((c) => c.regionSlug === region.slug)
             .map(
                 (city) =>
-                    `<a href="${rel('/areas/' + city.slug + '.html', depth)}">${esc(city.name)} <span>${esc(
-                        city.county
-                    )}</span></a>`
+                    // Wrapped in an outer span so the county picks up the
+                    // small secondary-line styling, same as the services panel.
+                    `<a href="${rel('/areas/' + city.slug + '.html', depth)}"><span>${esc(
+                        city.name
+                    )}<span>${esc(city.county)}</span></span></a>`
             )
             .join('\n                        ');
         return `<div class="nav__group"><p class="nav__group-title">${esc(region.name)}</p>
@@ -181,7 +183,10 @@ function header(page, depth) {
                 <span class="nav__panel nav__panel--cols">
                     ${cityLinks}
                     <div class="nav__group nav__group--all">
-                        <a href="${rel('/service-areas.html', depth)}">All areas <span>Illinois &amp; Virginia</span></a>
+                        <a href="${rel(
+                            '/service-areas.html',
+                            depth
+                        )}"><span>All areas<span>Illinois &amp; Virginia</span></span></a>
                     </div>
                 </span>
             </span>

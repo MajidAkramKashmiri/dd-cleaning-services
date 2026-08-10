@@ -61,8 +61,10 @@
     --r-lg: 24px;
     --r-pill: 999px;
 
-    --wrap: 1200px;
+    --wrap: 1480px;
     --gut: clamp(1.15rem, 4vw, 2.5rem);
+    /* Long-form copy stays readable even though the shell is wide */
+    --measure: 64ch;
     --sp: clamp(4rem, 9vw, 7rem);
 
     --display: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
@@ -577,12 +579,23 @@ a.topbar__item:hover {
     z-index: 50;
 }
 
+/* Bridges the gap between the tab and the panel. Without it the pointer
+   crosses unhovered ground on its way down and the menu closes underneath it. */
+.nav__panel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1rem;
+    height: 1rem;
+}
+
 .nav__panel--wide {
     min-width: 340px;
 }
 
 .nav__panel--cols {
-    min-width: 460px;
+    min-width: 520px;
     display: none;
     grid-template-columns: 1fr 1fr;
     gap: .4rem;
@@ -1065,10 +1078,19 @@ a.topbar__item:hover {
 /* --------------------------------------------------------------------------
    Info strip
    -------------------------------------------------------------------------- */
+/* The strip deliberately straddles the hero's bottom edge. Keep the overlap to
+   roughly the icon row so the join reads as intentional rather than as a card
+   that happened to land on a colour change. */
 .info-strip {
-    margin-top: clamp(-5.5rem, -7vw, -4rem);
+    margin-top: clamp(-4.5rem, -5vw, -3.25rem);
     position: relative;
     z-index: 2;
+}
+
+/* The hero already carries deep bottom padding, so the section that follows
+   the strip does not need a full pad on top as well. */
+.info-strip + .section {
+    padding-top: clamp(2.5rem, 5vw, 4rem);
 }
 
 .info-grid {
@@ -1161,6 +1183,20 @@ a.topbar__item:hover {
     grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr);
     gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
+}
+
+/* The shell is wide, so body copy is capped independently — otherwise lines
+   run to 100+ characters on a large monitor. */
+.intro__text > p,
+.s-detail__text > p,
+.intro__text h2,
+.s-detail__text h2 {
+    max-width: var(--measure);
+}
+
+.intro__text > p.eyebrow,
+.s-detail__text > p.eyebrow {
+    max-width: none;
 }
 
 @media (max-width: 900px) {
