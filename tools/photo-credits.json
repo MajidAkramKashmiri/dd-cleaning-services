@@ -1,5 +1,5 @@
 {
-  "_note": "Provenance for the photographs in assets/img/work/. All CC0 (public domain): commercial use and modification permitted, no attribution required. Sourced from StockSnap via the Openverse API.",
+  "_note": "Provenance for the photographs in assets/img/work/. All CC0 (public domain): commercial use and modification permitted, no attribution required. Sourced from StockSnap via the Openverse API. 960px is the largest size the source CDN serves, so files are shipped at native size and never upscaled.",
   "photos": {
     "commercial-cleaning": {
       "file": "assets/img/work/commercial-cleaning.jpg",
@@ -7,7 +7,7 @@
       "license": "cc0",
       "source": "StockSnap via Openverse",
       "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/FSU5SG0X4U.jpg",
-      "original_size": "5184x3456"
+      "served_size": "960px wide (native)"
     },
     "office-cleaning": {
       "file": "assets/img/work/office-cleaning.jpg",
@@ -15,15 +15,15 @@
       "license": "cc0",
       "source": "StockSnap via Openverse",
       "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/SNJ2HCU9HX.jpg",
-      "original_size": "5760x3840"
+      "served_size": "960px wide (native)"
     },
     "carpet-cleaning": {
       "file": "assets/img/work/carpet-cleaning.jpg",
-      "title": "Rug Floor",
+      "title": "Couch Rug",
       "license": "cc0",
       "source": "StockSnap via Openverse",
-      "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/3269D623A7.jpg",
-      "original_size": "2509x1673"
+      "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/1DEA8CC2AB.jpg",
+      "served_size": "960px wide (native)"
     },
     "detail-sanitization": {
       "file": "assets/img/work/detail-sanitization.jpg",
@@ -31,7 +31,7 @@
       "license": "cc0",
       "source": "StockSnap via Openverse",
       "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/D3901L7G93.jpg",
-      "original_size": "2509x1673"
+      "served_size": "960px wide (native)"
     },
     "floor-cleaning": {
       "file": "assets/img/work/floor-cleaning.jpg",
@@ -39,7 +39,7 @@
       "license": "cc0",
       "source": "StockSnap via Openverse",
       "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/J4C1WJDMMU.jpg",
-      "original_size": "5472x3648"
+      "served_size": "960px wide (native)"
     },
     "home-cleaning": {
       "file": "assets/img/work/home-cleaning.jpg",
@@ -47,7 +47,7 @@
       "license": "cc0",
       "source": "StockSnap via Openverse",
       "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/TDNJ1H4VYN.jpg",
-      "original_size": "4000x2611"
+      "served_size": "960px wide (native)"
     },
     "hero": {
       "file": "assets/img/work/hero.jpg",
@@ -55,7 +55,7 @@
       "license": "cc0",
       "source": "StockSnap via Openverse",
       "original_url": "https://cdn.stocksnap.io/img-thumbs/960w/HIH67XC5G0.jpg",
-      "original_size": "5266x3511"
+      "served_size": "960px wide (native)"
     }
   }
 }

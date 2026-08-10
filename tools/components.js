@@ -67,7 +67,7 @@ function hero(depth) {
     return `
 <section class="hero" data-hero>
     <img class="hero__photo" src="${rel('/assets/img/work/hero.jpg', depth)}" alt="" aria-hidden="true"
-         fetchpriority="high" decoding="async" width="1400" height="933">
+         fetchpriority="high" decoding="async" width="960" height="640">
     <span class="aurora" aria-hidden="true"><i></i><i></i><i></i></span>
     <span class="grain" aria-hidden="true"></span>
     <span class="bubbles bubbles--hero" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -172,9 +172,9 @@ function serviceCards(depth, { limit } = {}) {
         }
         const base = rel('/assets/img/work/' + s.image, depth);
         return `<span class="s-card__media">
-                <img src="${base}-700.jpg" srcset="${base}-700.jpg 700w, ${base}.jpg 1400w"
+                <img src="${base}.jpg" srcset="${base}-480.jpg 480w, ${base}.jpg 960w"
                      sizes="(max-width: 600px) 92vw, (max-width: 1000px) 46vw, 31vw"
-                     alt="${esc(s.alt || '')}" loading="lazy" decoding="async" width="700" height="438">
+                     alt="${esc(s.alt || '')}" loading="lazy" decoding="async" width="960" height="640">
                 <span class="s-card__tint"></span>
                 <span class="s-card__num">${esc(s.num)}</span>
             </span>`;
@@ -209,11 +209,13 @@ function serviceMedia(s, depth) {
         return `<span class="s-detail__icon">${ICONS[s.icon]}</span>`;
     }
     const base = rel('/assets/img/work/' + s.image, depth);
+    // 960px is the largest the source offers — the descriptors say so rather
+    // than advertising a width the file does not have.
     return `<img class="s-detail__img"
              src="${base}.jpg"
-             srcset="${base}-700.jpg 700w, ${base}.jpg 1400w"
+             srcset="${base}-480.jpg 480w, ${base}.jpg 960w"
              sizes="(max-width: 860px) 92vw, 44vw"
-             alt="${esc(s.alt || '')}" loading="lazy" decoding="async" width="1400" height="1050">`;
+             alt="${esc(s.alt || '')}" loading="lazy" decoding="async" width="960" height="640">`;
 }
 
 function serviceDetails(depth) {
@@ -222,10 +224,12 @@ function serviceDetails(depth) {
 <article class="s-detail${i % 2 ? ' s-detail--flip' : ''}" id="${s.slug}">
     <figure class="s-detail__art s-card--${s.gradient}" data-reveal>
         <span class="s-detail__frame" aria-hidden="true"></span>
-        ${serviceMedia(s, depth)}
-        <span class="s-detail__tint" aria-hidden="true"></span>
-        <span class="s-detail__num" aria-hidden="true">${esc(s.num)}</span>
-        <span class="s-detail__chip" aria-hidden="true">${ICONS[s.icon]}</span>
+        <span class="s-detail__clip">
+            ${serviceMedia(s, depth)}
+            <span class="s-detail__tint" aria-hidden="true"></span>
+            <span class="s-detail__num" aria-hidden="true">${esc(s.num)}</span>
+            <span class="s-detail__chip" aria-hidden="true">${ICONS[s.icon]}</span>
+        </span>
     </figure>
     <div class="s-detail__text">
         <p class="eyebrow" data-reveal>${ICONS.sparkle} ${esc(s.kicker)}</p>

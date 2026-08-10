@@ -1726,6 +1726,16 @@ a.topbar__item:hover {
     isolation: isolate;
 }
 
+/* The art panel itself cannot clip, because the offset accent frame has to
+   escape it. So everything that must stay inside the rounded corners — photo,
+   tint, number, chip — lives in this layer, which does the clipping. */
+.s-detail__clip {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
 /* Offset accent frame — the asymmetry is deliberate. Perfectly concentric
    cards everywhere is a large part of what makes a layout look generated. */
 .s-detail__frame {

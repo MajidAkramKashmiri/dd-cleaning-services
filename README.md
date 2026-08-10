@@ -196,9 +196,12 @@ testimonials, booking form and a link-dense footer.
 ### Imagery
 
 Seven photographs in `assets/img/work/`, one per service plus a hero backdrop.
-Each is served at two sizes (`-700.jpg` and full) via `srcset`, lazy-loaded
-below the fold, and carries a brand gradient tint so six photos of different
-colour temperature still read as one set. Total weight is about 1.6 MB.
+Each is served at two sizes (`-480.jpg` and a 960px full) via `srcset`,
+lazy-loaded below the fold, and carries a brand gradient tint so six photos of
+different colour temperature still read as one set. Total weight is under 1 MB.
+
+960px is the largest size the source CDN serves, so the files ship at native
+size and are never upscaled — an upscaled photo is a soft photo.
 
 **Licensing.** Every photo is **CC0 / public domain**, sourced from StockSnap
 via the Openverse API. CC0 permits commercial use and modification with no
@@ -212,13 +215,16 @@ Photographs of your own work will lift this site more than any other single
 change, and they cost nothing but a phone camera.
 
 To swap one, drop a new file into `assets/img/work/` using the same base name
-(e.g. `carpet-cleaning.jpg` plus a 700px-wide `carpet-cleaning-700.jpg`) and
+(e.g. `carpet-cleaning.jpg` plus a 480px-wide `carpet-cleaning-480.jpg`) and
 rebuild. To resize a photo to match:
 
 ```bash
-sips -s format jpeg -s formatOptions 72 -Z 1400 source.jpg --out carpet-cleaning.jpg
-sips -s format jpeg -s formatOptions 68 -Z 700  source.jpg --out carpet-cleaning-700.jpg
+sips -s format jpeg -s formatOptions 74 -Z 960 source.jpg --out carpet-cleaning.jpg
+sips -s format jpeg -s formatOptions 66 -Z 480 source.jpg --out carpet-cleaning-480.jpg
 ```
+
+If your own photos are larger than 960px, raise the `-Z 960` and update the
+`srcset` width descriptors in `tools/components.js` to match.
 
 Update the `alt` text in `tools/data.js` at the same time — it describes the
 photo for screen readers and for search engines.

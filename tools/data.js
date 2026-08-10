@@ -146,7 +146,7 @@ const SERVICES = [
         gradient: 'c',
         image: 'carpet-cleaning',
         alt:
-            'Close view of a deep-pile carpet in a traffic lane, mid-clean'
+            'A plush carpet and upholstered bench in a hotel lounge, freshly extracted'
     },
     {
         slug: 'detail-sanitization',
