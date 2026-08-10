@@ -223,7 +223,6 @@ function serviceDetails(depth) {
         (s, i) => `
 <article class="s-detail${i % 2 ? ' s-detail--flip' : ''}" id="${s.slug}">
     <figure class="s-detail__art s-card--${s.gradient}" data-reveal>
-        <span class="s-detail__frame" aria-hidden="true"></span>
         <span class="s-detail__clip">
             ${serviceMedia(s, depth)}
             <span class="s-detail__tint" aria-hidden="true"></span>
