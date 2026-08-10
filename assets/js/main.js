@@ -188,7 +188,7 @@
             stop();
             timer = window.setInterval(function () {
                 show(index + 1);
-            }, 7000);
+            }, 4000);
         };
 
         var stop = function () {
