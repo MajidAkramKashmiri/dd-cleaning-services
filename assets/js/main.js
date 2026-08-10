@@ -1,0 +1,392 @@
+/* ==========================================================================
+   DD Cleaning Services — site behaviour
+   Everything here is progressive enhancement. With JS blocked the pages still
+   read, the nav still links, and the form still posts.
+   ========================================================================== */
+(function () {
+    'use strict';
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ----------------------------------------------------------------------
+       Current year in the footer
+       ---------------------------------------------------------------------- */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-year]'), function (el) {
+        el.textContent = String(new Date().getFullYear());
+    });
+
+    /* ----------------------------------------------------------------------
+       Sticky header shadow
+       ---------------------------------------------------------------------- */
+    var headerEl = document.querySelector('.site-header');
+    if (headerEl) {
+        var onScroll = function () {
+            headerEl.classList.toggle('is-stuck', window.scrollY > 8);
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    /* ----------------------------------------------------------------------
+       Mobile nav
+       ---------------------------------------------------------------------- */
+    var navToggle = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('site-nav');
+
+    if (navToggle && nav) {
+        navToggle.addEventListener('click', function () {
+            var open = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', String(!open));
+            nav.classList.toggle('is-open', !open);
+            document.body.style.overflow = !open ? 'hidden' : '';
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       Dropdown menus — click to open, Escape and outside click to close
+       ---------------------------------------------------------------------- */
+    var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.nav__item'));
+
+    function closeDropdowns(except) {
+        dropdowns.forEach(function (item) {
+            if (item === except) {
+                return;
+            }
+            item.classList.remove('is-open');
+            var btn = item.querySelector('.nav__toggle');
+            if (btn) {
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    dropdowns.forEach(function (item) {
+        var btn = item.querySelector('.nav__toggle');
+        if (!btn) {
+            return;
+        }
+
+        btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            var open = item.classList.contains('is-open');
+            closeDropdowns(item);
+            item.classList.toggle('is-open', !open);
+            btn.setAttribute('aria-expanded', String(!open));
+        });
+
+        // Hover only on pointer devices wide enough for the desktop nav.
+        if (window.matchMedia('(hover: hover) and (min-width: 1081px)').matches) {
+            item.addEventListener('mouseenter', function () {
+                closeDropdowns(item);
+                item.classList.add('is-open');
+                btn.setAttribute('aria-expanded', 'true');
+            });
+            item.addEventListener('mouseleave', function () {
+                item.classList.remove('is-open');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!event.target.closest('.nav__item')) {
+            closeDropdowns(null);
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Escape') {
+            return;
+        }
+        closeDropdowns(null);
+        if (nav && nav.classList.contains('is-open')) {
+            nav.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            navToggle.focus();
+        }
+    });
+
+    /* ----------------------------------------------------------------------
+       Hero slider
+       ---------------------------------------------------------------------- */
+    var heroEl = document.querySelector('[data-hero]');
+
+    if (heroEl) {
+        var slides = Array.prototype.slice.call(heroEl.querySelectorAll('.hero__slide'));
+        var dots = Array.prototype.slice.call(heroEl.querySelectorAll('.hero__dot'));
+        var index = 0;
+        var timer = null;
+
+        var show = function (next) {
+            index = (next + slides.length) % slides.length;
+            slides.forEach(function (slide, i) {
+                var active = i === index;
+                slide.classList.toggle('is-active', active);
+                if (active) {
+                    slide.removeAttribute('aria-hidden');
+                } else {
+                    slide.setAttribute('aria-hidden', 'true');
+                }
+            });
+            dots.forEach(function (dot, i) {
+                dot.classList.toggle('is-active', i === index);
+                if (i === index) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
+            });
+        };
+
+        var start = function () {
+            if (reduceMotion || slides.length < 2) {
+                return;
+            }
+            stop();
+            timer = window.setInterval(function () {
+                show(index + 1);
+            }, 7000);
+        };
+
+        var stop = function () {
+            if (timer) {
+                window.clearInterval(timer);
+                timer = null;
+            }
+        };
+
+        dots.forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                show(parseInt(dot.getAttribute('data-goto'), 10));
+                start();
+            });
+        });
+
+        heroEl.addEventListener('mouseenter', stop);
+        heroEl.addEventListener('mouseleave', start);
+        heroEl.addEventListener('focusin', stop);
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                stop();
+            } else {
+                start();
+            }
+        });
+
+        start();
+    }
+
+    /* ----------------------------------------------------------------------
+       FAQ accordion
+       ---------------------------------------------------------------------- */
+    Array.prototype.forEach.call(document.querySelectorAll('.faq__q'), function (btn) {
+        btn.addEventListener('click', function () {
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            var panel = document.getElementById(btn.getAttribute('aria-controls'));
+            btn.setAttribute('aria-expanded', String(!open));
+            if (panel) {
+                panel.hidden = open;
+            }
+        });
+    });
+
+    /* ----------------------------------------------------------------------
+       Reveal on scroll
+       ---------------------------------------------------------------------- */
+    var revealables = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+
+    if (!revealables.length) {
+        // nothing to do
+    } else if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealables.forEach(function (el) {
+            el.classList.add('is-in');
+        });
+    } else {
+        var observer = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.06 }
+        );
+        revealables.forEach(function (el) {
+            observer.observe(el);
+        });
+
+        // Safety net: reveal-on-scroll hides content until the observer fires.
+        // If nothing at all has fired a few seconds in, the environment is not
+        // running the observer — show everything rather than an empty page.
+        window.setTimeout(function () {
+            if (!document.querySelector('[data-reveal].is-in')) {
+                revealables.forEach(function (el) {
+                    el.classList.add('is-in');
+                });
+            }
+        }, 2500);
+    }
+
+    /* ----------------------------------------------------------------------
+       Quote form
+       ---------------------------------------------------------------------- */
+    var form = document.getElementById('quote-form');
+
+    if (form) {
+        var status = form.querySelector('[data-form-status]');
+        var key = form.getAttribute('data-access-key');
+        var connected = key && key.indexOf('REPLACE_WITH') !== 0;
+
+        // Preselect a service when arriving from a "get a price for X" link.
+        var wanted = new URLSearchParams(window.location.search).get('service');
+        if (wanted) {
+            var select = form.querySelector('#qf-service');
+            var slug = function (text) {
+                return text
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-|-$/g, '');
+            };
+            Array.prototype.forEach.call(select ? select.options : [], function (option) {
+                // "professional-carpet-cleaning" also matches the "carpet-cleaning" slug.
+                var optionSlug = slug(option.value);
+                if (optionSlug === wanted || optionSlug.indexOf(wanted) > -1) {
+                    select.value = option.value;
+                }
+            });
+        }
+
+        var setError = function (field, message) {
+            var wrap = field.closest('.field');
+            if (!wrap) {
+                return;
+            }
+            var slot = wrap.querySelector('[data-error]');
+            wrap.classList.toggle('is-invalid', Boolean(message));
+            if (slot) {
+                slot.textContent = message || '';
+            }
+            if (message) {
+                field.setAttribute('aria-invalid', 'true');
+            } else {
+                field.removeAttribute('aria-invalid');
+            }
+        };
+
+        var validateField = function (field) {
+            var value = (field.value || '').trim();
+
+            if (field.hasAttribute('required') && !value) {
+                setError(field, 'This one is needed.');
+                return false;
+            }
+            if (field.type === 'tel' && value && value.replace(/[^0-9]/g, '').length < 7) {
+                setError(field, 'That does not look like a full phone number.');
+                return false;
+            }
+            if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+                setError(field, 'Check the email address.');
+                return false;
+            }
+            setError(field, '');
+            return true;
+        };
+
+        var fields = Array.prototype.slice.call(form.querySelectorAll('input, select, textarea')).filter(function (f) {
+            return f.type !== 'hidden' && !f.classList.contains('hp');
+        });
+
+        fields.forEach(function (field) {
+            field.addEventListener('blur', function () {
+                validateField(field);
+            });
+            field.addEventListener('input', function () {
+                if (field.closest('.field') && field.closest('.field').classList.contains('is-invalid')) {
+                    validateField(field);
+                }
+            });
+        });
+
+        var say = function (message, kind) {
+            if (!status) {
+                return;
+            }
+            status.textContent = message;
+            status.className = 'form-status is-visible ' + (kind === 'ok' ? 'is-ok' : 'is-error');
+        };
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var ok = true;
+            var firstBad = null;
+            fields.forEach(function (field) {
+                if (!validateField(field)) {
+                    ok = false;
+                    if (!firstBad) {
+                        firstBad = field;
+                    }
+                }
+            });
+
+            if (!ok) {
+                say('A couple of fields still need attention.', 'error');
+                if (firstBad) {
+                    firstBad.focus();
+                }
+                return;
+            }
+
+            // Silently drop anything that filled the honeypot.
+            if (form.querySelector('.hp') && form.querySelector('.hp').checked) {
+                return;
+            }
+
+            if (!connected) {
+                say(
+                    'This form is not connected to an inbox yet. Please call us instead — the number is at the top of ' +
+                        'the page — and we will pick it up straight away.',
+                    'error'
+                );
+                return;
+            }
+
+            var button = form.querySelector('button[type="submit"]');
+            var original = button ? button.innerHTML : '';
+            if (button) {
+                button.disabled = true;
+                button.textContent = 'Sending…';
+            }
+
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { Accept: 'application/json' }
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    if (data && data.success) {
+                        form.reset();
+                        say('Thanks — that is with us. We will come back to you within one working day.', 'ok');
+                    } else {
+                        say('That did not send. Please call us instead and we will sort it out on the spot.', 'error');
+                    }
+                })
+                .catch(function () {
+                    say('That did not send — the connection dropped. Please call us and we will take the details.', 'error');
+                })
+                .then(function () {
+                    if (button) {
+                        button.disabled = false;
+                        button.innerHTML = original;
+                    }
+                });
+        });
+    }
+})();

@@ -1,0 +1,26 @@
+{
+  "name": "DD Cleaning Services",
+  "short_name": "DD Cleaning",
+  "description": "Commercial and residential cleaning across Illinois and Virginia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6D28D9",
+  "icons": [
+    {
+      "src": "/assets/img/brand/favicon-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/brand/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
